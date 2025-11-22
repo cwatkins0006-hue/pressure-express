@@ -1,3 +1,25 @@
+# main.py – Elite Pressure Wash & Paint (Railway-ready)
+from fasthtml.common import *
+import uvicorn
+from starlette.staticfiles import StaticFiles
+from pathlib import Path
+import httpx
+
+# ←←← THIS MUST BE AT THE VERY TOP (after imports) ←←←
+app = FastHTML(hdrs=(
+    picolink,
+    Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"),
+    Script(src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"),
+    Link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap", rel="stylesheet"),
+))
+app.mount("/public", StaticFiles(directory="public"), name="public")
+Path("public/gallery").mkdir(parents=True, exist_ok=True)
+
+# ─── CONFIG ───
+COMPANY = "Elite Pressure Wash & Paint"
+PHONE = "(555) 123-4567"
+CITY = "Austin, TX"
+
 @app.get("/quote")
 def quote_page():
     return Title("Instant Quote – "+COMPANY), Html(Head(style), Body(
