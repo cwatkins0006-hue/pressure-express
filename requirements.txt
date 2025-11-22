@@ -1,0 +1,6 @@
+python-fasthtml
+uvicorn
+httpx
+requests
+beautifulsoup4
+lxml
